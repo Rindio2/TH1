@@ -32,7 +32,7 @@
             // Chuyển đổi giá trị nhập vào thành số nguyên
             time1 = parseInt(time1);
 
-            if(!isNaN(time1)){
+            if(!isNaN(time1) && time1 <=24){
 
                 if(time1 < 18){
                     document.getElementById("ketqua").innerHTML = "Good day";
