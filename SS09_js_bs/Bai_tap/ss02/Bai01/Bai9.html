@@ -50,6 +50,21 @@
 
     <script>
 
+        function resetInput() {
+            document.getElementById("toan").value = ""; // Xóa nội dung trong ô input
+            document.getElementById("li").value = "";
+            document.getElementById("hoa").value = "";
+            document.getElementById("van").value = "";
+            document.getElementById("su").value = "";
+            document.getElementById("dia").value = "";
+            document.getElementById("ketqua").innerHTML = ""; // Xóa kết quả hiển thị
+        }
+        document.addEventListener("keypress", function(event) {
+            if (event.key === 'Enter') {
+                kiemTraDTB();
+            }
+        });
+
         function kiemTraDTB(){
             
             let DTB;
@@ -73,7 +88,7 @@
 
             // console.log(DTB);
 
-            if(toan,li,hoa,van,su,dia <=10){
+            if(toan,li,hoa,van,su,dia <= 10){
                 
                 if( DTB >= 8 ){
                     
@@ -87,32 +102,21 @@
                 }
                 else if(DTB < 5){
                     document.getElementById("ketqua").innerHTML = " Loại Yếu ";
+                    
                 }
                 
                 
 
             }
             else{
+                resetInput();
                 document.getElementById("ketqua").innerHTML = "Vui lòng nhập đúng điểm số";
             }
             
 
 
         }
-        function resetInput() {
-            document.getElementById("toan").value = ""; // Xóa nội dung trong ô input
-            document.getElementById("li").value = "";
-            document.getElementById("hoa").value = "";
-            document.getElementById("van").value = "";
-            document.getElementById("su").value = "";
-            document.getElementById("dia").value = "";
-            document.getElementById("ketqua").innerHTML = ""; // Xóa kết quả hiển thị
-        }
-        document.addEventListener("keypress", function(event) {
-            if (event.key === 'Enter') {
-                kiemTraDTB();
-            }
-        });
+        
 
 
     </script>
