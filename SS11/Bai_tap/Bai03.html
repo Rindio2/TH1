@@ -25,26 +25,19 @@
 
 
     <script>
-        function timSoLonNhat(){
-
+        function timSoLonNhat() {
             let input = document.getElementById("inputArray").value;
-            let arr = input.split(' ').map(item => item.trim());
+            let arr = input.split(/\s+/).map(item => parseInt(item.trim())); // Chuyển các phần tử thành số nguyên
 
-            let max;
-                max = arr[0];
-            for (let i = 1; i < arr.length -1; i++) {
-                if(max < arr[i]){
+            let max = arr[0];
+
+            for (let i = 1; i < arr.length; i++) {
+                if (!isNaN(arr[i]) && max < arr[i]) {
                     max = arr[i];
                 }
-                else{
-                    max = max;
-                }
-                
             }
 
-            document.getElementById("max").innerText = "Số lớn nhất là:" + max;
-
-
+            document.getElementById("max").innerText = "Số lớn nhất là: " + max;
         }
 
 
