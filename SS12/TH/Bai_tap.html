@@ -52,7 +52,7 @@
                     if (where >= 0 && where < todoList.length) {
                         let updatedJob = prompt("Nhập nội dung muốn cập nhật:");
                         if (updatedJob !== null && updatedJob !== "") {
-                            todoList[where] = updatedJob;
+                            todoList[where-1] = updatedJob;
                         }
                         displayList();
                     } else {
@@ -97,6 +97,11 @@
         function displayList() {
             document.getElementById("todoList").innerText = "List công việc: \n" + todoList.join("\n");
         }
+        document.addEventListener("keypress", function(event) {
+            if (event.key === 'Enter') {
+                joy();
+            }
+        });
 
 
     </script>
