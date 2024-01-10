@@ -10,7 +10,7 @@
 
 
     <input type="text" id="input">
-    <button ondblclick="addToCart()">mua</button>
+    <button onclick="addToCart()">mua</button>
     
 
     <script>
@@ -52,27 +52,27 @@
         
         function addToCart() {
             
-            let productName = document.getElementById("input").value;
+            let valueInput = document.getElementById("input").value;
 
-            // Find the product by name in the products array
-            let product = products.find((prod) => prod.name.toLowerCase() === productName.toLowerCase());
+            // tìm sản phẩm bằng name
+            let product = products.find((prod) => prod.name.toLowerCase() === valueInput.toLowerCase());
 
-            // Check if the product exists in the store
+            // kiểm tra sản phẩm và tính bill
             if (product) {
-                // Check if the product is already in the cart
-                let cartItem = cart.find((item) => item.name.toLowerCase() === productName.toLowerCase());
+                
+                let cartItem = cart.find((item) => item.name.toLowerCase() === valueInput.toLowerCase());
 
                 if (cartItem) {
-                    // If the product is already in the cart, increase the quantity
+                    // nếu có thì tăng số lượng sản phẩm
                     cartItem.quantity++;
                 } else {
-                    // If the product is not in the cart, add it with a quantity of 1
+                    // nếu không có sản phẩm thì khởi tạo sản phẩm vào giỏ hàng
                     cart.push({ ...product, quantity: 1 });
                 }
 
-                // Calculate the total bill
+                // tính bill
                 let totalBill = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-                console.log("Product added to cart:", productName);
+                console.log("Product added to cart:", valueInput);
                 console.log("Total bill:", totalBill);
             } else {
                 console.log("Product not found in the store.");
