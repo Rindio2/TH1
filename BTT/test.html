@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Học Viên</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HTML content -->
+<h1>Quản Lý Học Viên</h1>
+
+<h2>Thông tin học viên</h2>
+<form id="studentForm">
+    <!-- ... (your existing form elements) ... -->
+    <button type="button" onclick="saveStudent()">Lưu</button>
+    <button type="button" onclick="change()">Đổi</button>
+</form>
+
+<h2>Danh sách học viên</h2>
+<button type="button" onclick="sortStudents()">Sắp Xếp theo Alphabet</button>
+<label for="search">Tìm Kiếm:</label>
+<input type="text" id="search" oninput="searchStudents()">
+<table id="studentTable">
+    <!-- Table content will be dynamically generated using JavaScript -->
+</table>
+
+<script>
+    // JavaScript logic
+    let students = [];
+    let selectedStudentIndex = -1;
+
+    document.getElementById('studentTable').addEventListener('click', function (event) {
+        // Check if the clicked element is an edit or delete link
+        if (event.target && (event.target.id === 'ed' || event.target.id === 'de')) {
+            event.preventDefault(); // Prevent default link behavior
+            handleAction(event.target.id);
+        }
+    });
+
+    function handleAction(action) {
+        if (action === 'ed') {
+            editStudent();
+        } else if (action === 'de') {
+            deleteStudent();
+        }
+    }
+
+    function saveStudent() {
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let phone = document.getElementById('phone').value;
+        let address = document.getElementById('address').value;
+        let gender = document.getElementById('gender').value;
+
+        let student = { name, email, phone, address, gender };
+        students.push(student);
+        clearInputFields();
+        displayStudents();
+    }
+
+    function deleteStudent() {
+        if (selectedStudentIndex !== -1) {
+            students.splice(selectedStudentIndex, 1);
+            selectedStudentIndex = -1;
+            displayStudents();
+        } else {
+            alert("Please select a student to delete.");
+        }
+    }
+
+    function editStudent() {
+        if (selectedStudentIndex !== -1) {
+            let selectedStudent = students[selectedStudentIndex];
+            document.getElementById('name').value = selectedStudent.name;
+            document.getElementById('email').value = selectedStudent.email;
+            document.getElementById('phone').value = selectedStudent.phone;
+            document.getElementById('address').value = selectedStudent.address;
+            document.getElementById('gender').value = selectedStudent.gender;
+        } else {
+            alert("Please select a student to edit.");
+        }
+    }
+
+    function change() {
+        if (selectedStudentIndex !== -1) {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let address = document.getElementById('address').value;
+            let gender = document.getElementById('gender').value;
+
+            students[selectedStudentIndex] = { name, email, phone, address, gender };
+            clearInputFields();
+            displayStudents();
+        } else {
+            alert("Please select a student to edit.");
+        }
+    }
+
+    function clearInputFields() {
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('address').value = '';
+        document.getElementById('gender').value = '';
+    }
+
+    function sortStudents() {
+        students.sort((a, b) => a.name.localeCompare(b.name));
+        displayStudents();
+    }
+
+    function searchStudents() {
+        // Implement your search logic here
+        displayStudents();
+    }
+
+    function displayStudents() {
+        let table = document.getElementById('studentTable');
+        table.innerHTML = '';
+
+        let headerRow = table.insertRow(0);
+        headerRow.innerHTML = '<th>Họ và Tên</th><th>Email</th><th>Số Điện Thoại</th><th>Quê Quán</th><th>Giới Tính</th><th>Hành Động</th>';
+
+        for (let i = 0; i < students.length; i++) {
+            let student = students[i];
+            let row = table.insertRow(i + 1);
+            row.innerHTML = `<td>${student.name}</td><td>${student.email}</td><td>${student.phone}</td><td>${student.address}</td><td>${student.gender}</td><td><a href="" id="ed">edit</a><p> </p><a href="" id="de">delete</a></td>`;
+        }
+    }
+</script>
+
+</body>
+</html>
