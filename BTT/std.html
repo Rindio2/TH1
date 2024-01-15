@@ -117,7 +117,7 @@
 
 <button type="button" onclick="sortStudents()">Sắp Xếp theo Alphabet</button>
 
-<label for="search">Tìm Kiếm:</label>
+<label style="margin-top: 10px;" for="search">Tìm Kiếm:</label>
 <input type="text" id="search" oninput="searchStudents()">
 
 
@@ -180,14 +180,16 @@
     
     function deleteStudent() {
         if (selectedStudentIndex !== -1) {
-           
-            students.splice(selectedStudentIndex, 1);
-
+            // confirm lại
+            const confirmDelete = confirm("Bạn có chắc chắn muốn xóa");
             
-            selectedStudentIndex = -1;
-
-           
-            displayStudents();
+            if (confirmDelete) {
+               
+                students.splice(selectedStudentIndex, 1);
+                selectedStudentIndex = -1;
+                displayStudents();
+            }
+            
         }
     }
     
