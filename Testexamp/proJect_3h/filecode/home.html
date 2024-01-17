@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="./filecode.css">
+    <link rel="stylesheet" href="./home.css">
     <script src="https://kit.fontawesome.com/72df7e5c59.js" crossorigin="anonymous"></script>
 <head>
     <meta charset="UTF-8">
@@ -23,9 +23,9 @@
         <div>
             <nav>
                 <ul class="custom_li">
-                    <li><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i><a href="https://web.facebook.com/profile.php?id=100038603835362">Giỏ hàng</a></li>
-                    <li><a href="https://web.facebook.com/profile.php?id=100038603835362">Đăng nhập</a></li>
-                    <li><a href="https://web.facebook.com/profile.php?id=100038603835362">Đăng ký</a></li>
+                    
+                    <li><a href="../account/login.html">Đăng nhập</a></li>
+                    <li><a href="../account/signup.html">Đăng ký</a></li>
                 </ul>
             </nav>
         </div>
@@ -49,7 +49,8 @@
         <div>
             <img src="../img/iphone11promax.jpg" alt="Điện thoại 11promax á nghen">
             <p> Iphone 11 promax </p>
-            <label>20.000.000đ</label><i class="fa-solid fa-cart-shopping" style="color: tomato;"></i> <br>
+            <label>20.000.000đ</label>
+            <i class="fa-solid fa-cart-shopping" style="color: tomato; cursor: pointer;" onclick="requestLogin()"></i> <br>
             <i class="fa-regular fa-heart"></i><label>46 Đã bán</label>
             <p>Hà Nội</p>
         </div>
@@ -58,7 +59,8 @@
         <div>
             <img src="../img/DacNhanTam.jpg" alt="Dark nhân tâm">
             <p> Đắc nhân tâm </p>
-            <label>100.000đ</label><i class="fa-solid fa-cart-shopping" style="color: tomato;"></i> <br>
+            <label>100.000đ</label>
+            <i class="fa-solid fa-cart-shopping" style="color: tomato; cursor: pointer;" onclick="requestLogin()"></i> <br>
             <i class="fa-regular fa-heart"></i><label>46 Đã bán</label>
             <p>Hà Nội</p>
         </div>
@@ -67,7 +69,8 @@
         <div>
             <img src="../img/haohao.jpg" alt="Nghèo">
             <p> Mì Hảo Hảo </p>
-            <label>90.000đ</label><i class="fa-solid fa-cart-shopping" style="color: tomato;"></i> <br>
+            <label>90.000đ</label>
+            <i class="fa-solid fa-cart-shopping" style="color: tomato; cursor: pointer;" onclick="requestLogin()"></i> <br>
             <i class="fa-regular fa-heart"></i><label>46 Đã bán</label>
             <p>Hà Nội</p>
         </div>
@@ -76,7 +79,8 @@
         <div>
             <img src="../img/BiaHeineken.jpg" alt="Thứ 7 máu chảy về đâu ạ">
             <p> Thùng bia Heineken </p>
-            <label>500.000đ</label><i class="fa-solid fa-cart-shopping" style="color: tomato;"></i> <br>
+            <label>500.000đ</label>
+            <i class="fa-solid fa-cart-shopping" style="color: tomato; cursor: pointer;" onclick="requestLogin()"></i> <br>
             <i class="fa-regular fa-heart"></i><label>46 Đã bán</label>
             <p>Hà Nội</p>
         </div>
@@ -85,7 +89,8 @@
         <div>
             <img src="../img/sunlight.jpg" alt="cảnh lấy vợ">
             <p>Nước rửa chén sunlight</p>
-            <label>20.000.000đ</label><i class="fa-solid fa-cart-shopping" style="color: tomato;"></i> <br>
+            <label>120.000đ</label>
+            <i class="fa-solid fa-cart-shopping" style="color: tomato; cursor: pointer;" onclick="requestLogin()"></i> <br>
             <i class="fa-regular fa-heart"></i><label>46 Đã bán</label>
             <p>Hà Nội</p>
         </div>
@@ -133,5 +138,17 @@
 
         <!-- </footer> -->
     </div>
+
+
+    <script>
+             
+        function requestLogin(){
+            alert("cần đăng nhập trước khi mua hàng");
+        }
+        
+        
+    </script>
+
+
 </body>
 </html>
