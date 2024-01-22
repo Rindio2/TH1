@@ -126,7 +126,7 @@
 
 <script>
 
-    let students = [];
+    let students = JSON.parse(localStorage.getItem("dataStudent")) || [];
     let selectedStudentIndex = -1;
 
     document.addEventListener('DOMContentLoaded', function() {
