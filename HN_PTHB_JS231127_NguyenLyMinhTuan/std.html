@@ -167,7 +167,8 @@
 
     function isValidPhoneNumber(phone) {
         
-        return /^[0-9]{10}$/.test(phone);
+        const vietnamesePhoneNumberRegex = /^(0[1-9]|01[2-9])[0-9]{8}$/;
+        return vietnamesePhoneNumberRegex.test(phone);
     }
 
     function saveStudent() {
@@ -198,6 +199,18 @@
             return;
         }
 
+        // Check for duplicate email
+        if (students.some(student => student.email === email)) {
+            alert('Email đã được sử dụng. Vui lòng chọn email khác.');
+            return;
+        }
+
+        // Check for duplicate phone number
+        if (students.some(student => student.phone === phone)) {
+            alert('Số điện thoại đã được sử dụng. Vui lòng chọn số điện thoại khác.');
+            return;
+        }
+
         let student = { name, email, phone, address, gender };
 
         if (selectedStudentIndex !== -1) {
@@ -215,11 +228,8 @@
         displayStudents();
     }
 
-    function isValidPhoneNumber(phone) {
-        
-        const vietnamesePhoneNumberRegex = /^(0[1-9]|01[2-9])[0-9]{8}$/;
-        return vietnamesePhoneNumberRegex.test(phone);
-    }
+
+    
     
     function deleteStudent() {
         if (selectedStudentIndex !== -1) {
