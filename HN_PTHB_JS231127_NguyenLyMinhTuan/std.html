@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản Lý Học Viên</title>
     <style>
-        /* CSS styles */
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -93,7 +92,7 @@
 <h2>Thông tin học viên</h2>
 <form id="studentForm">
     <label for="name">Họ và Tên:</label>
-    <input type="text" id="name" required> <br>
+    <input type="text" id="name" required pattern="[a-zA-Z ]+"> <br>
 
     <label for="email">Email:</label>
     <input type="email" id="email" required> <br>
@@ -117,8 +116,8 @@
 
 <button type="button" onclick="sortStudents()">Sắp Xếp theo Alphabet</button>
 
-<label style="margin-top: 10px;" for="search">Tìm Kiếm:</label>
-<input type="text" id="search" oninput="searchStudents()">
+<label style="margin-top: 10px;" for="search" >Tìm Kiếm:</label>
+<input type="text" id="search" oninput="searchStudents()" placeholder="Nhập vào tên học viên cần tìm">
 
 
 <table id="studentTable">
@@ -126,9 +125,16 @@
 </table>
 
 <script>
-    
+
     let students = [];
     let selectedStudentIndex = -1;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let storedStudents = localStorage.getItem('students');
+        students = storedStudents ? JSON.parse(storedStudents) : [];
+        displayStudents();
+    });
+
 
     // hàm giúp không bị reset trang khi chọn thực hiện hành động trong form
     document.getElementById('studentTable').addEventListener('click', function (event) {
@@ -149,6 +155,21 @@
         }
     }
 
+    function isValidName(name) {
+        
+        return name.trim() !== '';
+    }
+
+    function isValidEmail(email) {
+        
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function isValidPhoneNumber(phone) {
+        
+        return /^[0-9]{10}$/.test(phone);
+    }
+
     function saveStudent() {
         
         let name = document.getElementById('name').value;
@@ -157,39 +178,59 @@
         let address = document.getElementById('address').value;
         let gender = document.getElementById('gender').value;
 
-        
+        if (!isValidName(name)) {
+            alert('Họ và tên không được để trống.');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            alert('Email không hợp lệ.');
+            return;
+        }
+
+        if (!isValidPhoneNumber(phone)) {
+            alert('Số điện thoại không hợp lệ. Phải nhập đúng định dạng số điện thoại di động ở Việt Nam.');
+            return;
+        }
+
+        if (address.trim() === '') {
+            alert('Quê quán không được để trống.');
+            return;
+        }
+
         let student = { name, email, phone, address, gender };
 
         if (selectedStudentIndex !== -1) {
-            // If in edit mode, update the existing student
             students.splice(selectedStudentIndex, 0, student);
             clearInputFields();
         } else {
-            
             students.push(student);
             clearInputFields();
         }
 
-        // tạo lại lựa chọn
-        selectedStudentIndex = -1;
+        localStorage.setItem('students', JSON.stringify(students));
 
+        selectedStudentIndex = -1;
         
         displayStudents();
     }
-    
+
+    function isValidPhoneNumber(phone) {
+        
+        const vietnamesePhoneNumberRegex = /^(0[1-9]|01[2-9])[0-9]{8}$/;
+        return vietnamesePhoneNumberRegex.test(phone);
+    }
     
     function deleteStudent() {
         if (selectedStudentIndex !== -1) {
-            // confirm lại
             const confirmDelete = confirm("Bạn có chắc chắn muốn xóa");
             
             if (confirmDelete) {
-               
                 students.splice(selectedStudentIndex, 1);
                 selectedStudentIndex = -1;
+                localStorage.setItem('students', JSON.stringify(students));
                 displayStudents();
             }
-            
         }
     }
     
@@ -231,12 +272,12 @@
         }
     }
     function clearInputFields() {
-        // Clear input fields
+        // làm sạch lại ô input
         document.getElementById('name').value = '';
         document.getElementById('email').value = '';
         document.getElementById('phone').value = '';
         document.getElementById('address').value = '';
-        document.getElementById('gender').value = '';
+        // document.getElementById('gender').value = '';
     }
     
     function sortStudents() {
