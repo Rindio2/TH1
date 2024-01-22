@@ -199,13 +199,13 @@
             return;
         }
 
-        // Check for duplicate email
+        // kiểm tra mail
         if (students.some(student => student.email === email)) {
             alert('Email đã được sử dụng. Vui lòng chọn email khác.');
             return;
         }
 
-        // Check for duplicate phone number
+        // kiểm tra số điện thoại
         if (students.some(student => student.phone === phone)) {
             alert('Số điện thoại đã được sử dụng. Vui lòng chọn số điện thoại khác.');
             return;
@@ -257,7 +257,7 @@
             document.getElementById('address').value = editedStudent.address;
             document.getElementById('gender').value = editedStudent.gender;
 
-            // Change the "Lưu" button to "Cập nhật"
+            // chuyển nút Lưu sang Cập nhật
             document.querySelector('button[type="button"][onclick="saveStudent()"]').innerText = "Cập nhật";
 
             // xóa
@@ -287,7 +287,7 @@
         document.getElementById('email').value = '';
         document.getElementById('phone').value = '';
         document.getElementById('address').value = '';
-        // document.getElementById('gender').value = '';
+        
     }
     
     function sortStudents() {
